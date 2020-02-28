@@ -11,20 +11,22 @@ const reduxThunkLocation = path.dirname(
 )
 const reduxLocation = path.dirname(require.resolve(`redux/package.json`))
 
-const getNonGatsbyCallSite = () =>
-  stackTrace
-    .get()
-    .find(
-      callSite =>
-        callSite &&
-        callSite.getFileName() &&
-        !callSite.getFileName().includes(gatsbyLocation) &&
-        !callSite.getFileName().includes(reduxLocation) &&
-        !callSite.getFileName().includes(reduxThunkLocation) &&
-        !isNodeInternalModulePath(callSite.getFileName())
-    )
+const getNonGatsbyCallSite = () => false
+// stackTrace
+//   .get()
+//   .find(
+//     callSite =>
+//       callSite &&
+//       callSite.getFileName() &&
+//       !callSite.getFileName().includes(gatsbyLocation) &&
+//       !callSite.getFileName().includes(reduxLocation) &&
+//       !callSite.getFileName().includes(reduxThunkLocation) &&
+//       !isNodeInternalModulePath(callSite.getFileName())
+//   )
 
 const getNonGatsbyCodeFrame = ({ highlightCode = true } = {}) => {
+  return null // Disable for development. DO NOT COMMIT
+
   const callSite = getNonGatsbyCallSite()
   if (!callSite) {
     return null
@@ -55,6 +57,8 @@ const getNonGatsbyCodeFrame = ({ highlightCode = true } = {}) => {
 }
 
 const getNonGatsbyCodeFrameFormatted = ({ highlightCode = true } = {}) => {
+  return null // Disable for development. DO NOT COMMIT
+
   const possibleCodeFrame = getNonGatsbyCodeFrame({
     highlightCode,
   })
